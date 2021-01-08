@@ -6,7 +6,7 @@ import logging
 import os
 from pathlib import Path
 
-import pygount
+from pygount import SourceAnalysis
 
 from odoo import api, fields, models
 from odoo.modules.module import get_module_path
@@ -145,7 +145,7 @@ class IrModuleModule(models.Model):
             )
 
             for file_path, file_ext in file_list:
-                file_res = pygount.source_analysis(
+                file_res = SourceAnalysis.from_file(
                     file_path, "", encoding=self._get_module_encoding(file_ext)
                 )
                 for k, v in analysed_datas.get(file_ext).items():
